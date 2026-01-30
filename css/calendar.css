@@ -1,0 +1,163 @@
+/* ===== Calendar Container ===== */
+.calendar-container {
+    background-color: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+}
+
+/* ===== Calendar Grid ===== */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--spacing-xs);
+}
+
+/* ===== Day Headers ===== */
+.day-header {
+    padding: var(--spacing-md);
+    text-align: center;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border);
+}
+
+/* ===== Day Cells ===== */
+.day-cell {
+    min-height: 100px;
+    padding: var(--spacing-sm);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background-color: white;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.day-cell:hover {
+    background-color: var(--surface);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.day-cell:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: -2px;
+}
+
+/* ===== Day Number ===== */
+.day-number {
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* ===== Other Month Days ===== */
+.day-cell.other-month {
+    background-color: var(--surface);
+    opacity: 0.5;
+}
+
+.day-cell.other-month .day-number {
+    color: var(--text-secondary);
+}
+
+.day-cell.other-month:hover {
+    background-color: var(--surface);
+    transform: none;
+    cursor: default;
+}
+
+/* ===== Today Highlight ===== */
+.day-cell.today {
+    background-color: var(--today-highlight);
+    border-color: var(--primary-color);
+    border-width: 2px;
+}
+
+.day-cell.today .day-number {
+    color: var(--primary-dark);
+    font-weight: 700;
+}
+
+/* ===== Event Indicators ===== */
+.event-indicators {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-top: auto;
+}
+
+.event-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--event-indicator);
+    flex-shrink: 0;
+}
+
+.event-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 var(--spacing-xs);
+    background-color: var(--event-indicator);
+    color: white;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* ===== Event List in Day Cell ===== */
+.event-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-xs);
+    max-height: 60px;
+    overflow-y: auto;
+}
+
+.event-item {
+    padding: 2px var(--spacing-xs);
+    background-color: var(--event-indicator);
+    color: white;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+}
+
+.event-item:hover {
+    opacity: 0.8;
+}
+
+/* Custom scrollbar for event list */
+.event-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.event-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.event-list::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 2px;
+}
+
+.event-list::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
