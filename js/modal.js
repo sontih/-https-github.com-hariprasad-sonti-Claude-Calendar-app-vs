@@ -100,8 +100,8 @@ const Modal = {
         }
 
         // Set default color
-        document.getElementById('eventColor').value = '#4CAF50';
-        document.getElementById('colorLabel').textContent = '#4CAF50';
+        document.getElementById('eventColor').value = '#1a73e8';
+        document.getElementById('colorLabel').textContent = '#1A73E8';
 
         this.open();
     },

@@ -77,7 +77,7 @@ const Events = {
             date: eventData.date,
             startTime: eventData.startTime,
             endTime: eventData.endTime,
-            color: eventData.color || '#4CAF50',
+            color: eventData.color || '#1a73e8',
             createdAt: Date.now(),
             updatedAt: Date.now()
         };
@@ -112,7 +112,7 @@ const Events = {
             date: eventData.date,
             startTime: eventData.startTime,
             endTime: eventData.endTime,
-            color: eventData.color || '#4CAF50'
+            color: eventData.color || '#1a73e8'
         };
 
         // Update in storage

@@ -180,7 +180,7 @@ const Calendar = {
                 const eventItem = document.createElement('div');
                 eventItem.className = 'event-item';
                 eventItem.textContent = Utils.truncate(event.title, 20);
-                eventItem.style.backgroundColor = event.color;
+                eventItem.setAttribute('data-color', event.color);
                 eventItem.setAttribute('data-event-id', event.id);
                 eventItem.setAttribute('title', event.title);
                 container.appendChild(eventItem);
