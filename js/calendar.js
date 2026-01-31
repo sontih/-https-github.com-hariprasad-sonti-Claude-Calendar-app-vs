@@ -115,6 +115,7 @@ const Calendar = {
     createDayCell(day, isOtherMonth, events, isToday = false, dateStr = null) {
         const cell = document.createElement('div');
         cell.className = 'day-cell';
+        cell.setAttribute('role', 'gridcell');
 
         if (isOtherMonth) {
             cell.classList.add('other-month');
@@ -141,7 +142,17 @@ const Calendar = {
             cell.setAttribute('data-date', dateStr);
             cell.setAttribute('tabindex', '0');
             cell.setAttribute('role', 'button');
-            cell.setAttribute('aria-label', `${Utils.getMonthName(this.currentMonth)} ${day}, ${this.currentYear}`);
+
+            // Enhanced ARIA label with event count
+            const eventCount = events ? events.length : 0;
+            let ariaLabel = `${Utils.getMonthName(this.currentMonth)} ${day}, ${this.currentYear}`;
+            if (isToday) {
+                ariaLabel += ', today';
+            }
+            if (eventCount > 0) {
+                ariaLabel += `, ${eventCount} ${eventCount === 1 ? 'event' : 'events'}`;
+            }
+            cell.setAttribute('aria-label', ariaLabel);
 
             cell.addEventListener('click', (e) => {
                 // Check if clicked on an event item
@@ -183,6 +194,19 @@ const Calendar = {
                 eventItem.setAttribute('data-color', event.color);
                 eventItem.setAttribute('data-event-id', event.id);
                 eventItem.setAttribute('title', event.title);
+                eventItem.setAttribute('role', 'button');
+                eventItem.setAttribute('tabindex', '0');
+                eventItem.setAttribute('aria-label', `${event.title} at ${event.startTime} - ${event.endTime}`);
+
+                // Keyboard support for event items
+                eventItem.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.handleEventClick(event.id);
+                    }
+                });
+
                 container.appendChild(eventItem);
             });
         } else {
@@ -192,6 +216,8 @@ const Calendar = {
             badge.className = 'event-badge';
             badge.textContent = events.length;
             badge.setAttribute('title', `${events.length} events`);
+            badge.setAttribute('aria-label', `${events.length} events on this day`);
+            badge.setAttribute('role', 'status');
             container.appendChild(badge);
         }
 
